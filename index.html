@@ -3,11 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/css-variables.css">
     <link rel="stylesheet" href="css/style.css">
     <title>todo-list</title>
 </head>
 <body>
+    <div id="app">
 
+        <header>
+            <h2>My Tasks</h2>
+            <span><input id="input-add" type="text" placeholder="Add new task"><button id="button-add">+</button></span>
+        </header>
+
+        <main>
+            <li class="empty-state">
+                <p id="p-notasks">No tasks</p>
+            </li>
+            <!-- <ul id="todo-list">
+                <li class="task"> 
+                    <input type="checkbox" id="task-1" class="task-checkbox">
+                    <label for="task-1" class="task-text">Buy milk</label>
+                    <span class="delete-btn"><img src="assets/images/remove.png"></span>
+                </li>
+                <li class="task"> 
+                    <input type="checkbox" id="task-2" class="task-checkbox">
+                    <label for="task-2" class="task-text">Buy milk</label>
+                    <span class="delete-btn"><img src="assets/images/remove.png"></span>
+                </li>
+                <li class="task"> 
+                    <input type="checkbox" id="task-3" class="task-checkbox">
+                    <label for="task-3" class="task-text">Buy milk</label>
+                    <span class="delete-btn"><img src="assets/images/remove.png"></span>
+                </li>
+                <li class="task"> 
+                    <input type="checkbox" id="task-4" class="task-checkbox">
+                    <label for="task-4" class="task-text">Buy milk</label>
+                    <span class="delete-btn"><img src="assets/images/remove.png"></span>
+                </li>
+            </ul> -->
+        </main>
+
+        <footer>
+            <button id="clear-completed">Clear Completed</button>
+            <p><span id="tasks-count">0</span> tasks left</p>
+        </footer>
+
+    </div>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
