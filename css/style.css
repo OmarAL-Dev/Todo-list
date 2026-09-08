@@ -80,7 +80,7 @@ header span {
 }
 
 /* ===== Main ===== */
-.empty-state {
+#empty-state {
     text-align: center;
     color: rgba(0, 0, 0, 0.4);
     padding: 30px 0;
@@ -94,7 +94,6 @@ main {
     min-height: 0;
 }
 
-/* الحاوية المسؤولة عن التمرير - منفصلة عن main */
 .scroll-container {
     height: 100%;
     overflow-y: auto;
@@ -227,7 +226,6 @@ button:focus-visible {
     outline-offset: 2px;
 }
 
-/* ===== Scrollbar تخصيص ===== */
 .scroll-container::-webkit-scrollbar {
     width: 6px;
 }
@@ -283,4 +281,10 @@ button:focus-visible {
     .task-text {
         font-size: clamp(14px, 1.5vw, 16px);
     }
+}
+
+
+
+.hidden {
+    display: none;
 }
