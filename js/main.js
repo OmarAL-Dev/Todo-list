@@ -56,19 +56,20 @@ inputAdd.addEventListener("keydown", (event) => {
 todoList.addEventListener("click", (event) => {
     if (event.target.closest(".delete-btn")) {
         let task = event.target.closest(".task");
-
-        // Check state before removing the task
-        let isChecked  = task.querySelector(".task-checkbox").checked
+        let isChecked = task.querySelector(".task-checkbox").checked
         task.remove();
 
-        // Only reduce count if task was not already checked
         if(!isChecked) {
             tasksLeft--
             tasksCount.textContent = tasksLeft
         }
+
+        // Show "No tasks" message if list is empty
+        if (todoList.children.length === 0) {
+            emptyState.classList.remove("hidden")
+        }
     }
 });
-
 // Handle checkbox clicks (event delegation)
 todoList.addEventListener("click", (event) => {
     if (event.target.closest(".task-checkbox")) {
