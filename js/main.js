@@ -42,6 +42,12 @@ function addTask() {
     }
 }
 
+function checkEmptyState() {
+    if (todoList.children.length === 0) {
+            emptyState.classList.remove("hidden")
+        }
+}
+
 // Add task on button click
 buttonAdd.addEventListener("click", addTask)
 
@@ -65,9 +71,7 @@ todoList.addEventListener("click", (event) => {
         }
 
         // Show "No tasks" message if list is empty
-        if (todoList.children.length === 0) {
-            emptyState.classList.remove("hidden")
-        }
+        checkEmptyState()
     }
 });
 
@@ -99,4 +103,8 @@ clearBtn.addEventListener("click", () => {
             task.remove();
         }
     });
+
+    checkEmptyState()
 });
+
+
