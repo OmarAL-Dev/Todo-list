@@ -70,6 +70,7 @@ todoList.addEventListener("click", (event) => {
         }
     }
 });
+
 // Handle checkbox clicks (event delegation)
 todoList.addEventListener("click", (event) => {
     if (event.target.closest(".task-checkbox")) {
@@ -85,4 +86,17 @@ todoList.addEventListener("click", (event) => {
             tasksCount.textContent = tasksLeft
         }
     }
+});
+
+// Remove all completed tasks when clear button is clicked
+clearBtn.addEventListener("click", () => {
+    let tasks = Array.from(todoList.children);
+
+    tasks.forEach(task => {
+        let inputCheckBox = task.querySelector(".task-checkbox");
+
+        if (inputCheckBox.checked) {
+            task.remove();
+        }
+    });
 });
