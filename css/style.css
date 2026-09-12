@@ -16,6 +16,7 @@
 
 * {
     font-family: 'Space-Grotesk';
+    -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
