@@ -14,9 +14,9 @@ const taskTemplate = document.querySelector("#task-template");
 let taskCounter = 1;
 let tasksLeft = 0;
 
-// Add tasks
+// Add new task
 function addTask() {
-    let inputNameTask = inputAdd.value.trim(); // إصلاح: تجاهل المسافات الفارغة
+    let inputNameTask = inputAdd.value.trim();
 
     if (inputNameTask.length > 0) {
         emptyState.classList.add("hidden");
@@ -43,20 +43,23 @@ function addTask() {
     }
 }
 
-// إصلاح: نعدّ عناصر .task فقط، لا كل الأبناء
+// Show empty state if no tasks
 function checkEmptyState() {
     if (todoList.querySelectorAll(".task").length === 0) {
         emptyState.classList.remove("hidden");
     }
 }
 
-buttonAdd.addEventListener("click", addTask);
+{
+    // Event listeners for adding tasks
+    buttonAdd.addEventListener("click", addTask);
 
-inputAdd.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") addTask();
-});
+    inputAdd.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") addTask();
+    });
+}
 
-// Delete + toggle
+// Handle delete and checkbox toggle
 todoList.addEventListener("click", (event) => {
     const taskElement = event.target.closest(".task");
     if (!taskElement) return;
@@ -70,7 +73,7 @@ todoList.addEventListener("click", (event) => {
             tasksCount.textContent = tasksLeft;
         }
         checkEmptyState();
-        return; // إصلاح: نتوقف هنا بعد الحذف
+        return;
     }
 
     if (event.target.closest(".task-checkbox")) {
@@ -83,7 +86,7 @@ todoList.addEventListener("click", (event) => {
     }
 });
 
-// إصلاح جذري: نتصفح عناصر .task فقط (querySelectorAll ترجع قائمة ثابتة وآمنة للحذف أثناء التكرار)
+// Clear all completed tasks
 clearBtn.addEventListener("click", () => {
     todoList.querySelectorAll(".task").forEach((task) => {
         const checkbox = task.querySelector(".task-checkbox");
