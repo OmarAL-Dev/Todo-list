@@ -29,6 +29,7 @@ function addTask() {
                     <span class="delete-btn"><img src="assets/icons/remove.svg"></span>
                 </li>
             `)
+
         inputAdd.value = null // clear input field
 
         taskCounter++
@@ -108,5 +109,3 @@ clearBtn.addEventListener("click", () => {
 
     checkEmptyState()
 });
-
-
