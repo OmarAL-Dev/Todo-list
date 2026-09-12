@@ -12,6 +12,7 @@ const tasksCount = document.querySelector("#tasks-count");
 let taskCounter = 1   // used for unique task IDs
 let tasksLeft = 0     // number of unfinished tasks
 
+// Add tasks
 function addTask() {
     let inputNameTask = inputAdd.value;
 
@@ -42,6 +43,7 @@ function addTask() {
     }
 }
 
+//Check empty state
 function checkEmptyState() {
     if (todoList.children.length === 0) {
             emptyState.classList.remove("hidden")
@@ -58,7 +60,7 @@ inputAdd.addEventListener("keydown", (event) => {
     }
 });
 
-// Handle delete button clicks (event delegation)
+// Task deletion button
 todoList.addEventListener("click", (event) => {
     if (event.target.closest(".delete-btn")) {
         let task = event.target.closest(".task");
@@ -75,7 +77,7 @@ todoList.addEventListener("click", (event) => {
     }
 });
 
-// Handle checkbox clicks (event delegation)
+// remaining tasks counter
 todoList.addEventListener("click", (event) => {
     if (event.target.closest(".task-checkbox")) {
         let theCondition = event.target.closest(".task-checkbox").checked
@@ -92,7 +94,7 @@ todoList.addEventListener("click", (event) => {
     }
 });
 
-// Remove all completed tasks when clear button is clicked
+// Remove all completed tasks
 clearBtn.addEventListener("click", () => {
     let tasks = Array.from(todoList.children);
 
