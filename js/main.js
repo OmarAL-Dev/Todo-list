@@ -25,7 +25,7 @@ function addTask() {
                 <li class="task"> 
                     <input type="checkbox" id="task-${taskCounter}" class="task-checkbox">
                     <label for="task-${taskCounter}" class="task-text">${inputNameTask}</label>
-                    <span class="delete-btn"><img src="assets/images/remove.png"></span>
+                    <span class="delete-btn"><img src="assets/images/remove.svg"></span>
                 </li>
             `)
         inputAdd.value = null // clear input field

@@ -1,24 +1,58 @@
+@font-face {
+    font-family: 'Pacifico';
+    src: url('../assets/fonts/Pacifico-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Space-Grotesk';
+    src: url('../assets/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Space-Grotesk';
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 :root {
     --accent-color: #6C5CE7;
     --accent-color-hover: #5849c4;
+
+    /* ألوان السطح (الكارت) - جاهزة للـ Dark Mode لاحقًا */
+    --surface-rgb: 255, 255, 255;
+    --surface-opacity: 0.7;
+    --surface-blur: 18px;
 }
 
 body {
-    height: 100vh;
-    background-color: #fafafa;
+    height: 100dvh;
+    background-image: url('../assets/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 #app {
     padding: 20px;
-    max-width: 400px;
+    width: 100%;
     margin: 0 auto;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
+
+    background-color: rgba(var(--surface-rgb), var(--surface-opacity));
+    backdrop-filter: blur(var(--surface-blur));
+    -webkit-backdrop-filter: blur(var(--surface-blur));
 }
 
 /* ===== Header ===== */
@@ -26,11 +60,14 @@ header {
     display: flex;
     flex-direction: column;
     padding: 40px 4px 0;
+    flex-shrink: 0;
 }
 
 header h2 {
     font-size: 27px;
     font-weight: 700;
+    color: var(--accent-color);
+    font-family: 'Pacifico';
 }
 
 header span {
@@ -116,18 +153,23 @@ main {
     border-left: 4px solid var(--accent-color);
     border-radius: 12px;
     padding: 14px 16px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    background-color: white;
-    transition: background-color 0.3s ease, box-shadow 0.2s ease, border-left-color 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    background-color: rgba(255, 255, 255, 0.75);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
 }
 
 .task:has(.task-checkbox:checked) {
     background-color: rgba(0, 0, 0, 0.05);
     border-left-color: rgba(0, 0, 0, 0.15);
+    box-shadow: none;
 }
 
 .task:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task:has(.task-checkbox:checked):hover {
+    box-shadow: none;
 }
 
 .task-checkbox {
@@ -174,9 +216,14 @@ main {
 .delete-btn {
     cursor: pointer;
     flex-shrink: 0;
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.3s ease;
     width: 20px;
     border-radius: 50%;
+    opacity: 1;
+}
+
+.task:has(.task-checkbox:checked) .delete-btn {
+    opacity: 0.4;
 }
 
 .delete-btn:hover {
@@ -195,6 +242,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 
 footer p {
@@ -262,11 +310,10 @@ button:focus-visible {
     #app {
         width: 90%;
         max-width: 900px;
-        background-color: white;
+        height: 80vh;
+        overflow: hidden;
         border-radius: 20px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        min-height: 75vh;
-        max-height: 90vh;
         padding: 4vh 4vw;
     }
 
@@ -282,8 +329,6 @@ button:focus-visible {
         font-size: clamp(14px, 1.5vw, 16px);
     }
 }
-
-
 
 .hidden {
     display: none;
