@@ -26,7 +26,7 @@ html, body {
 }
 
 :root {
-    --accent-color: #6C5CE7;
+    --accent-color: #5d5caa;
     --accent-color-hover: #5849c4;
 
     /* ألوان السطح (الكارت) - جاهزة للـ Dark Mode لاحقًا */
@@ -37,7 +37,7 @@ html, body {
 
 body {
     height: 100dvh;
-    background-image: url('../assets/images/background.jpg');
+    background-image: url('../assets/images/backgroundNew.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -157,6 +157,19 @@ main {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
     background-color: rgba(255, 255, 255, 0.75);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease,
+    opacity 0.25s ease, transform 0.25s ease;
+}
+
+.task.removing {
+    opacity: 0;
+    transform: translateX(20px) scale(0.97);
+    pointer-events: none; /* يمنع أي تفاعل مع العنصر وهو بيختفي */
+}
+
+.task.adding {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
 }
 
 .task:has(.task-checkbox:checked) {
@@ -249,17 +262,17 @@ footer {
 footer p {
     font-size: 13px;
     font-style: italic;
-    color: rgb(100, 100, 100);
+    color: rgb(60, 60, 60);
     margin: 0;
 }
 
 #clear-completed {
     background-color: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.248);
     border-radius: 20px;
     padding: 6px 14px;
     font-size: 12px;
-    color: rgb(80, 80, 80);
+    color: rgb(60, 60, 60);
     cursor: pointer;
     transition: all 0.2s ease;
 }
