@@ -10,11 +10,11 @@ const tasksCount = document.querySelector("#tasks-count");
 
 const taskTemplate = document.querySelector("#task-template");
 
-const taskDoneSound = new Audio('../assets/sounds/done.wav');
-const errorSound = new Audio('../assets/sounds/erorr.wav');
-const deleteSound = new Audio('../assets/sounds/delete.mp3');
-const clearAllSound = new Audio('../assets/sounds/clearAll.wav');
-const taskStart = new Audio('../assets/sounds/startTask.wav');
+const taskDoneSound = new Audio('assets/sounds/done.wav');
+const errorSound = new Audio('assets/sounds/erorr.wav');
+const deleteSound = new Audio('assets/sounds/delete.mp3');
+const clearAllSound = new Audio('assets/sounds/clearAll.wav');
+const taskStart = new Audio('assets/sounds/startTask.wav');
 
 
 // Counters
