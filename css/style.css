@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. FONTS & VARIABLES
+   ========================================================================== */
 @font-face {
     font-family: 'Pacifico';
     src: url('../assets/fonts/Pacifico-Regular.ttf') format('truetype');
@@ -14,8 +17,32 @@
     font-display: swap;
 }
 
+:root {
+    /* Brand Colors */
+    --accent-color: #5d5caa;
+    --accent-color-hover: #5849c4;
+
+    /* Text Colors */
+    --text-main: rgb(50, 50, 50);
+    --text-muted: rgba(0, 0, 0, 0.4);
+    
+    /* UI Borders & Shadows */
+    --border-light: rgba(0, 0, 0, 0.15);
+    --shadow-soft: 0 3px 8px rgba(0, 0, 0, 0.12);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    /* Glassmorphism Surface */
+    --surface-rgb: 255, 255, 255;
+    --surface-opacity: 0.7;
+    --surface-blur: 18px;
+}
+
+/* ==========================================================================
+   2. BASE & RESET
+   ========================================================================== */
 * {
-    font-family: 'Space-Grotesk';
+    box-sizing: border-box;
+    font-family: 'Space-Grotesk', sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -23,16 +50,6 @@ html, body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-}
-
-:root {
-    --accent-color: #5d5caa;
-    --accent-color-hover: #5849c4;
-
-    /* ألوان السطح (الكارت) - جاهزة للـ Dark Mode لاحقًا */
-    --surface-rgb: 255, 255, 255;
-    --surface-opacity: 0.7;
-    --surface-blur: 18px;
 }
 
 body {
@@ -43,6 +60,9 @@ body {
     background-attachment: fixed;
 }
 
+/* ==========================================================================
+   3. LAYOUT CONTAINER
+   ========================================================================== */
 #app {
     padding: 20px;
     width: 100%;
@@ -56,7 +76,9 @@ body {
     -webkit-backdrop-filter: blur(var(--surface-blur));
 }
 
-/* ===== Header ===== */
+/* ==========================================================================
+   4. HEADER & INPUT SECTION
+   ========================================================================== */
 header {
     display: flex;
     flex-direction: column;
@@ -68,7 +90,8 @@ header h2 {
     font-size: 27px;
     font-weight: 700;
     color: var(--accent-color);
-    font-family: 'Pacifico';
+    font-family: 'Pacifico', cursive;
+    margin: 0;
 }
 
 header span {
@@ -106,7 +129,7 @@ header span {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 #button-add:hover {
@@ -117,75 +140,103 @@ header span {
     transform: scale(0.95);
 }
 
-/* ===== Main ===== */
-#empty-state {
-    text-align: center;
-    color: rgba(0, 0, 0, 0.4);
-    padding: 30px 0;
-    font-style: italic;
-    list-style: none;
-}
-
+/* ==========================================================================
+   5. MAIN CONTENT & TASK LIST
+   ========================================================================== */
 main {
     margin-top: 20px;
     flex: 1;
     min-height: 0;
 }
 
+#empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 30px 0;
+    font-style: italic;
+}
+
+/* Scrollable Container & Scrollbar Styling */
 .scroll-container {
     height: 100%;
     overflow-y: auto;
     padding-right: 16px;
     margin-right: -16px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) transparent;
+}
+
+.scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color-hover);
 }
 
 #todo-list {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
+/* Task Item Card */
 .task {
     display: flex;
     align-items: center;
-    border: 2px solid rgba(0, 0, 0, 0.150);
+    border: 2px solid var(--border-light);
     border-left: 4px solid var(--accent-color);
     border-radius: 12px;
     padding: 14px 16px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-soft);
     background-color: rgba(255, 255, 255, 0.75);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-left-color 0.3s ease,
-    opacity 0.25s ease, transform 0.25s ease;
+    transition: background-color 0.3s ease, 
+                box-shadow 0.3s ease, 
+                border-left-color 0.3s ease,
+                opacity 0.25s ease, 
+                transform 0.25s ease;
 }
 
-.task.removing {
-    opacity: 0;
-    transform: translateX(20px) scale(0.97);
-    pointer-events: none; /* يمنع أي تفاعل مع العنصر وهو بيختفي */
+.task:hover {
+    box-shadow: var(--shadow-hover);
 }
 
+/* Task Animations */
 .task.adding {
     opacity: 0;
     transform: translateY(-8px) scale(0.97);
 }
 
+.task.removing {
+    opacity: 0;
+    transform: translateX(20px) scale(0.97);
+    pointer-events: none;
+}
+
+/* Task Completed State */
 .task:has(.task-checkbox:checked) {
     background-color: rgba(0, 0, 0, 0.05);
     border-left-color: rgba(0, 0, 0, 0.15);
     box-shadow: none;
 }
 
-.task:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
 .task:has(.task-checkbox:checked):hover {
     box-shadow: none;
 }
 
+/* Custom Checkbox */
 .task-checkbox {
     appearance: none;
     -webkit-appearance: none;
@@ -214,26 +265,27 @@ main {
     transform: translate(-50%, -50%);
 }
 
+/* Task Controls & Typography */
 .task-text {
     flex: 1;
     margin-left: 12px;
     font-size: 14px;
-    color: rgb(50, 50, 50);
+    color: var(--text-main);
     cursor: pointer;
 }
 
 .task-checkbox:checked ~ .task-text {
-    color: rgba(50, 50, 50, 0.4);
+    color: var(--text-muted);
     text-decoration: line-through;
 }
 
 .delete-btn {
     cursor: pointer;
     flex-shrink: 0;
-    transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.3s ease;
     width: 20px;
     border-radius: 50%;
     opacity: 1;
+    transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.3s ease;
 }
 
 .task:has(.task-checkbox:checked) .delete-btn {
@@ -249,7 +301,9 @@ main {
     transform: scale(0.9);
 }
 
-/* ===== Footer ===== */
+/* ==========================================================================
+   6. FOOTER SECTION
+   ========================================================================== */
 footer {
     margin-top: 24px;
     padding: 0 4px;
@@ -288,31 +342,14 @@ button:focus-visible {
     outline-offset: 2px;
 }
 
-.scroll-container::-webkit-scrollbar {
-    width: 6px;
+/* ==========================================================================
+   7. UTILITIES & RESPONSIVE DESIGN
+   ========================================================================== */
+.hidden {
+    display: none !important;
 }
 
-.scroll-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.scroll-container::-webkit-scrollbar-thumb {
-    background-color: var(--accent-color);
-    border-radius: 10px;
-}
-
-.scroll-container::-webkit-scrollbar-thumb:hover {
-    background-color: var(--accent-color-hover);
-}
-
-.scroll-container {
-    scrollbar-width: thin;
-    scrollbar-color: var(--accent-color) transparent;
-}
-
-/* ===== Responsive: Larger Screens ===== */
 @media (min-width: 768px) {
-
     body {
         background-color: #e8e8ea;
         display: flex;
@@ -342,8 +379,4 @@ button:focus-visible {
     .task-text {
         font-size: clamp(14px, 1.5vw, 16px);
     }
-}
-
-.hidden {
-    display: none;
 }
