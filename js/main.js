@@ -129,7 +129,7 @@ function addTask() {
         playSound(errorSound);
         inputAdd.style.borderBottom = "1px solid rgba(240, 6, 6, 0.66)";
         setTimeout(() => {
-            inputAdd.style.borderBottom = "1px solid rgba(0, 0, 0, 0.2)";
+            inputAdd.style.borderBottom = "1px solid var(--input-border)";
         }, 500);
         return;
     }
