@@ -1,8 +1,17 @@
 export function sendToLocalStorage(localStorageArr) {
-    localStorage.setItem("Data", JSON.stringify(localStorageArr));
+    try {
+        localStorage.setItem("Data", JSON.stringify(localStorageArr));
+    } catch {
+        // Continue without persistence when local storage is unavailable.
+    }
 }
 
 export function getFromLocalStorage() {
-    const dataStr = localStorage.getItem("Data");
-    return dataStr ? JSON.parse(dataStr) : [];
+    try {
+        const dataStr = localStorage.getItem("Data");
+        const data = dataStr ? JSON.parse(dataStr) : [];
+        return Array.isArray(data) ? data : [];
+    } catch {
+        return [];
+    }
 }

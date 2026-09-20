@@ -10,8 +10,16 @@
 }
 
 @font-face {
-    font-family: 'Space-Grotesk';
-    src: url('../assets/fonts/SpaceGrotesk-Regular.ttf') format('truetype');
+    font-family: 'ArefRuqaa';
+    src: url('../assets/fonts/ArefRuqaa-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lemonada';
+    src: url('../assets/fonts/Lemonada-Regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -21,7 +29,7 @@
    2. BASE
    ========================================================================== */
 * {
-    font-family: 'Space-Grotesk', sans-serif;
+    font-family: 'Lemonada', sans-serif;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -74,9 +82,14 @@ header h2 {
     margin: 0;
 }
 
+html[lang="ar"] header h2 {
+    font-family: 'ArefRuqaa', serif;
+}
+
 header span {
     display: flex;
     align-items: center;
+    gap: 8px;
     margin-top: 15px;
     width: 100%;
 }
@@ -106,7 +119,6 @@ header span {
 }
 
 #button-add {
-    margin-left: 8px;
     flex-shrink: 0;
     width: 32px;
     height: 32px;
@@ -150,8 +162,8 @@ main {
 .scroll-container {
     height: 100%;
     overflow-y: auto;
-    padding-right: 16px;
-    margin-right: -16px;
+    padding-inline-end: 16px;
+    margin-inline-end: -16px;
     scrollbar-width: thin;
     scrollbar-color: var(--accent-color) transparent;
 }
@@ -187,7 +199,7 @@ main {
     display: flex;
     align-items: center;
     border: 2px solid var(--border-light);
-    border-left: 4px solid var(--accent-color);
+    border-inline-start: 4px solid var(--accent-color);
     border-radius: 12px;
     padding: 14px 16px;
     box-shadow: var(--shadow-soft);
@@ -218,7 +230,7 @@ main {
 /* Task Completed State */
 .task:has(.task-checkbox:checked) {
     background-color: var(--task-done-bg);
-    border-left-color: var(--task-done-border-left);
+    border-inline-start-color: var(--task-done-border-left);
     box-shadow: none;
 }
 
@@ -258,10 +270,13 @@ main {
 /* Task Controls & Typography */
 .task-text {
     flex: 1;
-    margin-left: 12px;
+    width: 0;
+    min-width: 0;
+    margin-inline: 12px;
     font-size: 14px;
     color: var(--text-main);
     cursor: pointer;
+    overflow-wrap: anywhere;
 }
 
 .task-checkbox:checked ~ .task-text {
@@ -273,6 +288,10 @@ main {
     cursor: pointer;
     flex-shrink: 0;
     width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    background: transparent;
     border-radius: 50%;
     opacity: 1;
     transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.3s ease;
@@ -293,6 +312,11 @@ main {
 
 .delete-btn:active {
     transform: scale(0.9);
+}
+
+.delete-btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
 }
 
 /* ==========================================================================
@@ -408,7 +432,7 @@ footer p {
     padding: 24px;
     border: 1px solid var(--dialog-border);
     border-radius: 20px;
-    background-color: var(--dialog-bg);
+    background-color: rgba(var(--surface-rgb), var(--surface-opacity));
     color: var(--dialog-text);
     box-shadow: var(--shadow-app);
     backdrop-filter: blur(var(--surface-blur));
@@ -515,4 +539,25 @@ footer p {
 
 #button-settings-finish:active {
     transform: scale(0.95);
+}
+
+/* Keep the task controls and dialog actions balanced in RTL layouts. */
+[dir="rtl"] .task {
+    text-align: right;
+}
+
+[dir="rtl"] .task.removing {
+    transform: translateX(-20px) scale(0.97);
+}
+
+[dir="rtl"] footer p {
+    text-align: left;
+}
+
+[dir="rtl"] .settings-actions {
+    justify-content: flex-start;
+}
+
+[dir="rtl"] #settings-dialog h3 {
+    text-align: right;
 }

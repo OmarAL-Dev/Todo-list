@@ -1,4 +1,5 @@
 import { sendToLocalStorage, getFromLocalStorage } from "./localstorage.js";
+import { setLanguage, translate, tPlural } from "./i18n.js";
 
 // Main elements
 const inputAdd = document.querySelector("#input-add");
@@ -7,11 +8,13 @@ const emptyState = document.querySelector("#empty-state");
 const todoList = document.querySelector("#todo-list");
 const clearBtn = document.querySelector("#clear-completed");
 const tasksCount = document.querySelector("#tasks-count");
+const tasksLeftLabel = document.querySelector("#tasks-left-label");
 const taskTemplate = document.querySelector("#task-template");
-const settingDialog = document.querySelector('#settings-dialog');
-const settingsOptions = document.querySelector('.settings-options');
-const buttonSettingsFinish = document.querySelector('#button-settings-finish');
-const settingsBtn = document.querySelector('#settings-btn');
+
+// Settings elements
+const settingsDialog = document.querySelector("#settings-dialog");
+const settingsForm = document.querySelector("#settings-form");
+const settingsBtn = document.querySelector("#settings-btn");
 
 // Sound effects
 const taskAddedSound = new Audio('assets/sounds/startTask.wav');
@@ -20,45 +23,112 @@ const errorSound = new Audio('assets/sounds/erorr.wav');
 const deleteSound = new Audio('assets/sounds/delete.mp3');
 const clearAllSound = new Audio('assets/sounds/clearAll.wav');
 
+/* ==========================================================================
+   SETTINGS (theme + language)
+   ========================================================================== */
+// Keep these keys aligned with the early settings script in index.html.
+const KEY_THEME = "theme";
+const KEY_LANGUAGE = "language";
+const KEY_ONBOARDED = "settings";
 
-
-settingsOptions.addEventListener('change', (event) => {
-    document.documentElement.setAttribute("data-theme", event.target.value)
-    localStorage.setItem('thame',`${event.target.value}`)
-})
-
-buttonSettingsFinish.addEventListener('click',() => {
-    localStorage.setItem('settings','1')
-})
-
-settingsBtn.addEventListener('click',() => {
-    settingDialog.showModal()
-})
-
-document.addEventListener('DOMContentLoaded', () => {
-    const thame = localStorage.getItem('thame')
-    const settings = localStorage.getItem('settings')
-
-    if(settings !== '1') {
-        settingDialog.showModal()
+function readSetting(key, fallback) {
+    try {
+        return localStorage.getItem(key) ?? fallback;
+    } catch {
+        return fallback;
     }
+}
 
-    if(thame == 'dark') {
-        document.documentElement.setAttribute("data-theme", "dark")
-    }else {
-        document.documentElement.setAttribute("data-theme", "light")
+function writeSetting(key, value) {
+    try {
+        localStorage.setItem(key, value);
+    } catch {
+        // Continue without persistence when local storage is unavailable.
     }
-})
+}
+
+function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
+}
+
+function getSavedSettings() {
+    return {
+        theme: readSetting(KEY_THEME, "light"),
+        language: readSetting(KEY_LANGUAGE, "en"),
+        onboarded: readSetting(KEY_ONBOARDED, null) === "1",
+    };
+}
+
+// Sync radio controls without dispatching change events.
+function syncFormWithSaved() {
+    const saved = getSavedSettings();
+    settingsForm.elements.theme.value = saved.theme;
+    settingsForm.elements.language.value = saved.language;
+}
+
+function openSettings() {
+    syncFormWithSaved();
+    settingsDialog.showModal();
+}
+
+// Apply the language and refresh the counter label.
+async function changeLanguage(language) {
+    await setLanguage(language);
+    updateTasksLeft();
+}
+
+// Preview changes immediately without saving them.
+settingsForm.addEventListener("change", (event) => {
+    const { name, value } = event.target;
+
+    if (name === "theme") applyTheme(value);
+    if (name === "language") changeLanguage(value);
+});
+
+// Save settings only when Finish is submitted.
+settingsForm.addEventListener("submit", () => {
+    const data = new FormData(settingsForm);
+
+    writeSetting(KEY_THEME, data.get("theme"));
+    writeSetting(KEY_LANGUAGE, data.get("language"));
+    writeSetting(KEY_ONBOARDED, "1");
+});
+
+// Prevent closing the first-visit dialog before Finish is submitted.
+settingsDialog.addEventListener("cancel", (event) => {
+    if (!getSavedSettings().onboarded) event.preventDefault();
+});
+
+// Restore saved settings whenever the dialog closes.
+settingsDialog.addEventListener("close", () => {
+    const saved = getSavedSettings();
+    applyTheme(saved.theme);
+    changeLanguage(saved.language);
+});
+
+settingsBtn.addEventListener("click", openSettings);
+
+/* ==========================================================================
+   TODO APP
+   ========================================================================== */
 
 // State
-let nextTaskId = 0;   
+let nextTaskId = 0;
 let tasksLeft = 0;
-let tasks = [];       
+let tasks = [];
+
+// Update the count and localized plural label.
+function updateTasksLeft() {
+    tasksCount.textContent = tasksLeft;
+
+    const label = tPlural("footer.tasksLeft", tasksLeft);
+    if (label !== undefined) tasksLeftLabel.textContent = label;
+}
 
 // Sound helper
 function playSound(sound) {
     sound.currentTime = 0;
-    sound.play();
+    sound.play().catch(() => {});
 }
 
 // Animations
@@ -95,6 +165,7 @@ function render() {
 
     if (!Array.isArray(tasks) || tasks.length === 0) {
         emptyState.classList.remove("hidden");
+        updateTasksLeft();
         return;
     }
 
@@ -111,15 +182,14 @@ function render() {
         label.setAttribute("for", `task-${task.id}`);
         input.checked = task.completed;
 
+        translate(clone); // Translate the detached template after cloning it.
         todoList.appendChild(clone);
     });
 
     tasksLeft = tasks.filter(task => !task.completed).length;
-    tasksCount.textContent = tasksLeft;
+    updateTasksLeft();
     nextTaskId = tasks.reduce((max, task) => task.id > max ? task.id : max, 0);
 }
-
-render();
 
 // Add Task Function
 function addTask() {
@@ -127,10 +197,8 @@ function addTask() {
 
     if (taskText.length === 0) {
         playSound(errorSound);
-        inputAdd.style.borderBottom = "1px solid rgba(240, 6, 6, 0.66)";
-        setTimeout(() => {
-            inputAdd.style.borderBottom = "1px solid var(--input-border)";
-        }, 500);
+        inputAdd.classList.add("error");
+        setTimeout(() => inputAdd.classList.remove("error"), 500);
         return;
     }
 
@@ -146,6 +214,7 @@ function addTask() {
     input.id = `task-${nextTaskId}`;
     label.setAttribute("for", `task-${nextTaskId}`);
 
+    translate(clone);
     animateTaskInsertion(taskElement);
     playSound(taskAddedSound);
     inputAdd.value = "";
@@ -157,7 +226,7 @@ function addTask() {
     });
 
     tasksLeft++;
-    tasksCount.textContent = tasksLeft;
+    updateTasksLeft();
     sendToLocalStorage(tasks);
 }
 
@@ -185,7 +254,7 @@ todoList.addEventListener("click", (event) => {
 
         if (!isChecked) {
             tasksLeft--;
-            tasksCount.textContent = tasksLeft;
+            updateTasksLeft();
         }
 
         sendToLocalStorage(tasks);
@@ -197,7 +266,7 @@ todoList.addEventListener("click", (event) => {
 
         tasks[taskIndex].completed = isChecked;
         tasksLeft += isChecked ? -1 : 1;
-        tasksCount.textContent = tasksLeft;
+        updateTasksLeft();
 
         if (isChecked) playSound(taskDoneSound);
 
@@ -212,8 +281,31 @@ clearBtn.addEventListener("click", () => {
     if (completedElements.length === 0) return;
 
     tasks = tasks.filter(task => !task.completed);
+    tasksLeft = tasks.length;
+    updateTasksLeft();
     playSound(clearAllSound);
     sendToLocalStorage(tasks);
 
     Promise.all(completedElements.map(animateTaskRemoval)).then(checkEmptyState);
 });
+
+/* ==========================================================================
+   INIT
+   ========================================================================== */
+async function init() {
+    const saved = getSavedSettings();
+
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js").catch((error) => {
+            console.error("Service worker registration failed:", error);
+        });
+    }
+
+    applyTheme(saved.theme);
+    await setLanguage(saved.language); // Load translations before rendering tasks.
+    render();
+
+    if (!saved.onboarded) openSettings();
+}
+
+init();

@@ -1,0 +1,21 @@
+{
+    "app.title": "Checklist",
+    "input.placeholder": "Add new task",
+    "input.add": "Add task",
+    "empty.state": "No tasks",
+    "footer.clear": "Clear Completed",
+    "footer.tasksLeft.one": "task left",
+    "footer.tasksLeft.other": "tasks left",
+    "task.delete": "Delete task",
+    "settings.open": "Settings",
+    "settings.title": "Settings",
+    "settings.language.legend": "Language",
+    "settings.language.title": "Choose language",
+    "settings.language.english": "English",
+    "settings.language.arabic": "Arabic",
+    "settings.theme.title": "Choose appearance",
+    "settings.theme.legend": "Appearance",
+    "settings.theme.light": "Light",
+    "settings.theme.dark": "Dark",
+    "settings.finish": "Finish"
+}

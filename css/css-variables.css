@@ -55,7 +55,6 @@
     --clear-btn-hover-text: #ffffff;
 
     /* Settings Dialog */
-    --dialog-bg: rgba(255, 255, 255, 0.9);
     --dialog-border: rgba(0, 0, 0, 0.1);
     --dialog-text: rgb(50, 50, 50);
     --backdrop-bg: rgba(0, 0, 0, 0.25);
@@ -122,7 +121,6 @@
     --clear-btn-hover-text: rgb(25, 25, 25);
 
      /* Settings Dialog */
-    --dialog-bg: rgba(30, 30, 42, 0.92);
     --dialog-border: rgba(255, 255, 255, 0.12);
     --dialog-text: rgb(230, 230, 238);
     --backdrop-bg: rgba(0, 0, 0, 0.4);
