@@ -37,5 +37,6 @@ The goal of Listly is to practice the basics of building a complete front-end ap
 
 ## Screenshots
 
-![Listly desktop](<img width="1909" height="954" alt="image" src="https://github.com/user-attachments/assets/c3cb96e9-7298-4660-b711-ccea5bcec28e" />)
-![Listly desktop](<img width="1910" height="955" alt="image" src="https://github.com/user-attachments/assets/f15e3e73-cb8a-4a4b-a4ed-9dc636ad3357" />)
+<img width="1909" height="954" alt="image" src="https://github.com/user-attachments/assets/51601c79-9f00-463d-8792-d92936aa1ed3" />
+<img width="1910" height="955" alt="image" src="https://github.com/user-attachments/assets/800351a4-c21c-473e-a129-439399840064" />
+
