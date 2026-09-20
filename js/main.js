@@ -17,11 +17,17 @@ const settingsForm = document.querySelector("#settings-form");
 const settingsBtn = document.querySelector("#settings-btn");
 
 // Sound effects
-const taskAddedSound = new Audio('assets/sounds/startTask.wav');
-const taskDoneSound = new Audio('assets/sounds/done.wav');
-const errorSound = new Audio('assets/sounds/erorr.wav');
-const deleteSound = new Audio('assets/sounds/delete.mp3');
-const clearAllSound = new Audio('assets/sounds/clearAll.wav');
+function createSound(path) {
+    const sound = new Audio(path);
+    sound.preload = "auto";
+    return sound;
+}
+
+const taskAddedSound = createSound('assets/sounds/startTask.wav');
+const taskDoneSound = createSound('assets/sounds/done.wav');
+const errorSound = createSound('assets/sounds/erorr.wav');
+const deleteSound = createSound('assets/sounds/delete.mp3');
+const clearAllSound = createSound('assets/sounds/clearAll.wav');
 
 /* ==========================================================================
    SETTINGS (theme + language)
@@ -296,7 +302,7 @@ async function init() {
     const saved = getSavedSettings();
 
     if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("./service-worker.js?v=8").catch((error) => {
+        navigator.serviceWorker.register("./service-worker.js?v=9").catch((error) => {
             console.error("Service worker registration failed:", error);
         });
     }
