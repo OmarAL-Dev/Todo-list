@@ -1,4 +1,4 @@
-const CACHE_NAME = "listly-shell-v1";
+const CACHE_NAME = "listly-shell-v8";
 const APP_SHELL = [
     "./",
     "./index.html",
@@ -20,6 +20,7 @@ const APP_SHELL = [
     "./assets/icons/icon-192.png",
     "./assets/icons/icon-512-re.png",
     "./assets/icons/icon-512.png",
+    "./assets/icons/plus.png",
     "./assets/icons/remove.svg",
     "./assets/icons/setting.png",
     "./assets/images/background.jpg",

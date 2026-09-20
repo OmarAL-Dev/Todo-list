@@ -33,9 +33,13 @@
     /* Input (add task) */
     --input-text: rgb(50, 50, 50);
     --input-placeholder: rgba(0, 0, 0, 0.4);
-    --input-border: rgba(28, 27, 27, 0.662);
-    --input-border-focus: rgb(35, 35, 35);
+    --input-border: rgba(28, 27, 27, 0.16);
+    --input-border-focus: rgba(93, 92, 170, 0.62);
     --input-border-error: rgba(240, 6, 6, 0.66);
+    --input-bg: rgba(255, 255, 255, 0.16);
+    --input-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    --input-focus-shadow: 0 0 0 2px rgba(93, 92, 170, 0.14);
+    --input-error-shadow: rgba(240, 6, 6, 0.14);
 
     /* Task */
     --task-bg: rgba(255, 255, 255, 0.75);
@@ -99,9 +103,13 @@
     /* Input (add task) */
     --input-text: rgb(230, 230, 238);
     --input-placeholder: rgba(255, 255, 255, 0.4);
-    --input-border: rgba(255, 255, 255, 0.5);
-    --input-border-focus: rgb(255, 255, 255);
+    --input-border: rgba(255, 255, 255, 0.2);
+    --input-border-focus: rgba(133, 131, 216, 0.72);
     --input-border-error: rgba(255, 90, 90, 0.8);
+    --input-bg: rgba(255, 255, 255, 0.045);
+    --input-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    --input-focus-shadow: 0 0 0 2px rgba(133, 131, 216, 0.2);
+    --input-error-shadow: rgba(255, 90, 90, 0.18);
 
     /* Task */
     --task-bg: rgba(255, 255, 255, 0.06);

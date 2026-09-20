@@ -296,16 +296,21 @@ async function init() {
     const saved = getSavedSettings();
 
     if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("./service-worker.js").catch((error) => {
+        navigator.serviceWorker.register("./service-worker.js?v=8").catch((error) => {
             console.error("Service worker registration failed:", error);
         });
     }
 
     applyTheme(saved.theme);
-    await setLanguage(saved.language); // Load translations before rendering tasks.
-    render();
 
-    if (!saved.onboarded) openSettings();
+    try {
+        await setLanguage(saved.language); // Load translations before rendering tasks.
+        render();
+
+        if (!saved.onboarded) openSettings();
+    } finally {
+        document.documentElement.setAttribute("data-app-ready", "true");
+    }
 }
 
 init();

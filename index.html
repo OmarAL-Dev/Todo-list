@@ -12,6 +12,7 @@
             root.setAttribute('data-theme', theme === 'dark' ? 'dark' : 'light');
             root.setAttribute('lang', language === 'ar' ? 'ar' : 'en');
             root.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
+            root.setAttribute('data-app-ready', 'false');
         } catch (error) {}
     </script>
 
@@ -38,7 +39,9 @@
             <h2 data-i18n="app.title">Checklist</h2>
             <span>
                 <input id="input-add" type="text" placeholder="Add new task" data-i18n-placeholder="input.placeholder">
-                <button id="button-add" aria-label="Add task" data-i18n-aria-label="input.add">+</button>
+                <button id="button-add" aria-label="Add task" data-i18n-aria-label="input.add">
+                    <img src="assets/icons/plus.png" alt="">
+                </button>
             </span>
         </header>
 
@@ -91,12 +94,12 @@
 
                     <label class="option-card">
                         <input type="radio" name="language" value="en" checked>
-                                <span data-i18n="settings.language.english">English</span>
+                            <span data-i18n="settings.language.english">English</span>
                     </label>
 
                     <label class="option-card">
                         <input type="radio" name="language" value="ar">
-                                <span data-i18n="settings.language.arabic">Arabic</span>
+                            <span data-i18n="settings.language.arabic">Arabic</span>
                     </label>
                 </fieldset>
             </section>

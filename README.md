@@ -1,30 +1,42 @@
-A small offline-first to-do list application built with HTML, CSS, and JavaScript.
+# Listly
 
-## Current Status
+Listly is a simple to-do list app built for learning web development.
 
-Ready for local use and installation as a Progressive Web App.
+This is an educational, non-commercial project. It was created to practice HTML, CSS, JavaScript, responsive design, and Progressive Web App features.
 
-## Project Objective
+## Technologies
 
-The project supports English and Arabic, light and dark themes, local task persistence, sound effects, and offline use after the first successful load.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![PWA](https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)
 
-## Technologies Used
+- HTML5 for the page structure.
+- CSS3 for the layout, themes, animations, and responsive design.
+- JavaScript ES6 Modules for the app logic.
+- Service Worker for offline support.
+- Web App Manifest for installation as an app.
 
-- HTML5
-- CSS3
-- JavaScript (ES6 Modules)
-- Service Worker
-- Web App Manifest
+## Features
 
-## Run Locally
+- Add, complete, delete, and clear tasks.
+- Save tasks in the browser using Local Storage.
+- English and Arabic language support.
+- Right-to-left layout for Arabic.
+- Light and dark themes.
+- Arabic and English custom fonts.
+- Sound effects for common actions.
+- Offline support after the first online visit.
+- Installable as a Progressive Web App.
+- Responsive layout for desktop and mobile screens.
+- Accessible buttons, labels, and keyboard-friendly controls.
 
-Serve the project from `localhost` or another secure origin. Opening `index.html` directly is not enough because modules, locale files, and Service Worker registration require a server.
+## Project Goal
 
-```bash
-python3 -m http.server 4173
-```
+The goal of Listly is to practice the basics of building a complete front-end application before moving to larger frameworks and projects.
 
-Open `http://localhost:4173/`, load the app once while online, then install it from the browser. The Service Worker caches the application shell, translations, fonts, images, icons, and sounds for offline use.
+## Screenshots
 
-<img width="1920" height="1080" alt="Listly" src="https://github.com/user-attachments/assets/0dbed768-44d3-4c97-b20c-d98ae17a0964" />
-<img width="1080" height="1920" alt="Listly Mobile" src="https://github.com/user-attachments/assets/7abe9342-ff2b-4000-95ee-82513d78b8f3" />
+![Listly desktop](https://github.com/user-attachments/assets/0dbed768-44d3-4c97-b20c-d98ae17a0964)
+
+![Listly mobile](https://github.com/user-attachments/assets/7abe9342-ff2b-4000-95ee-82513d78b8f3)

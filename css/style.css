@@ -39,6 +39,10 @@ html, body {
     overflow: hidden;
 }
 
+html[data-app-ready="false"] #app {
+    visibility: hidden;
+}
+
 body {
     height: 100dvh;
     background-color: var(--page-bg-color);
@@ -95,14 +99,15 @@ header span {
 }
 
 #input-add {
-    border: none;
-    border-bottom: 1px solid var(--input-border);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
     flex: 1;
     font-size: 15px;
-    padding-bottom: 4px;
-    background: transparent;
+    padding: 9px 12px;
+    background-color: var(--input-bg);
     color: var(--input-text);
-    transition: border-bottom-color 0.2s ease;
+    box-shadow: var(--input-shadow);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 #input-add::placeholder {
@@ -111,18 +116,20 @@ header span {
 
 #input-add:focus {
     outline: none;
-    border-bottom-color: var(--input-border-focus);
+    border-color: var(--input-border-focus);
+    box-shadow: var(--input-focus-shadow);
 }
 
 #input-add.error {
-    border-bottom-color: var(--input-border-error);
+    border-color: var(--input-border-error);
+    box-shadow: 0 0 0 3px var(--input-error-shadow);
 }
 
 #button-add {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
     border: none;
     background-color: var(--accent-color);
     color: var(--on-accent-color);
@@ -136,10 +143,18 @@ header span {
 
 #button-add:hover {
     background-color: var(--accent-color-hover);
+    transform: translateY(-1px);
 }
 
 #button-add:active {
     transform: scale(0.95);
+}
+
+#button-add img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 /* ==========================================================================
@@ -174,6 +189,12 @@ main {
 
 .scroll-container::-webkit-scrollbar-track {
     background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
