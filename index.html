@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,10 +51,52 @@
         </main>
         <footer>
             <button id="clear-completed">Clear Completed</button>
+            <button id="settings-btn" aria-label="Settings" title="Settings">
+                <img src="/assets/icons/setting.png" alt="Settings">
+            </button>
             <p><span id="tasks-count">0</span> tasks left</p>
         </footer>
 
     </div>
+
+    <dialog id="settings-dialog" aria-labelledby="settings-title">
+    <form id="settings-form" method="dialog">
+
+        <section class="settings-step" data-step="theme">
+            <h3 id="settings-title" data-i18n="settings.theme.title">Choose appearance</h3>
+
+            <fieldset class="settings-options">
+                <legend class="visually-hidden" data-i18n="settings.theme.legend">Appearance</legend>
+
+                <label class="option-card">
+                    <input id="option-card-input-light" type="radio" name="theme" value="light">
+                    <span data-i18n="settings.theme.light">Light</span>
+                </label>
+
+                <label class="option-card">
+                    <input id="option-card-input-dark" type="radio" name="theme" value="dark">
+                    <span data-i18n="settings.theme.dark">Dark</span>
+                </label>
+            </fieldset>
+        </section>
+
+        <div class="settings-actions">
+            <button type="submit" id="button-settings-finish" data-i18n="settings.finish">Finish</button>
+        </div>
+
+    </form>
+</dialog>
+<script>
+    try {
+        const savedTheme = localStorage.getItem('thame');
+        document.documentElement.setAttribute(
+            'data-theme',
+            savedTheme === 'dark' ? 'dark' : 'light'
+        );
+    } catch (error) {
+        document.documentElement.setAttribute('data-theme', 'light');
+    }
+</script>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>

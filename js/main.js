@@ -8,6 +8,10 @@ const todoList = document.querySelector("#todo-list");
 const clearBtn = document.querySelector("#clear-completed");
 const tasksCount = document.querySelector("#tasks-count");
 const taskTemplate = document.querySelector("#task-template");
+const settingDialog = document.querySelector('#settings-dialog');
+const settingsOptions = document.querySelector('.settings-options');
+const buttonSettingsFinish = document.querySelector('#button-settings-finish');
+const settingsBtn = document.querySelector('#settings-btn');
 
 // Sound effects
 const taskAddedSound = new Audio('assets/sounds/startTask.wav');
@@ -15,6 +19,36 @@ const taskDoneSound = new Audio('assets/sounds/done.wav');
 const errorSound = new Audio('assets/sounds/erorr.wav');
 const deleteSound = new Audio('assets/sounds/delete.mp3');
 const clearAllSound = new Audio('assets/sounds/clearAll.wav');
+
+
+
+settingsOptions.addEventListener('change', (event) => {
+    document.documentElement.setAttribute("data-theme", event.target.value)
+    localStorage.setItem('thame',`${event.target.value}`)
+})
+
+buttonSettingsFinish.addEventListener('click',() => {
+    localStorage.setItem('settings','1')
+})
+
+settingsBtn.addEventListener('click',() => {
+    settingDialog.showModal()
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    const thame = localStorage.getItem('thame')
+    const settings = localStorage.getItem('settings')
+
+    if(settings !== '1') {
+        settingDialog.showModal()
+    }
+
+    if(thame == 'dark') {
+        document.documentElement.setAttribute("data-theme", "dark")
+    }else {
+        document.documentElement.setAttribute("data-theme", "light")
+    }
+})
 
 // State
 let nextTaskId = 0;   

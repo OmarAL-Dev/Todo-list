@@ -1,0 +1,134 @@
+/* ==========================================================================
+   LIGHT THEME (default)
+   Naming rule: element - property - state   (e.g. --input-border-focus)
+   ========================================================================== */
+:root {
+    color-scheme: light;
+
+    /* Brand Colors */
+    --accent-color: #5d5caa;
+    --accent-color-hover: #5849c4;
+    --on-accent-color: #ffffff;
+
+    /* Page & Background */
+    --page-bg-color: #e8e8ea;
+    --app-bg-image: url('../assets/images/background.jpg');
+
+    /* Text Colors */
+    --text-main: rgb(50, 50, 50);
+    --text-muted: rgba(0, 0, 0, 0.4);
+    --text-footer: rgb(60, 60, 60);
+
+    /* Glassmorphism Surface */
+    --surface-rgb: 255, 255, 255;
+    --surface-opacity: 0.7;
+    --surface-blur: 18px;
+
+    /* UI Borders & Shadows */
+    --border-light: rgba(0, 0, 0, 0.15);
+    --shadow-soft: 0 3px 8px rgba(0, 0, 0, 0.12);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-app: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+    /* Input (add task) */
+    --input-text: rgb(50, 50, 50);
+    --input-placeholder: rgba(0, 0, 0, 0.4);
+    --input-border: rgba(28, 27, 27, 0.662);
+    --input-border-focus: rgb(35, 35, 35);
+    --input-border-error: rgba(240, 6, 6, 0.66);
+
+    /* Task */
+    --task-bg: rgba(255, 255, 255, 0.75);
+    --task-done-bg: rgba(0, 0, 0, 0.05);
+    --task-done-border-left: rgba(0, 0, 0, 0.15);
+    --checkbox-border: rgb(35, 35, 35);
+
+    /* Delete button */
+    --delete-btn-hover-bg: rgba(255, 58, 48, 0.156);
+    --delete-icon-filter: none;
+
+    /* Clear Completed button */
+    --clear-btn-border: rgba(0, 0, 0, 0.248);
+    --clear-btn-text: rgb(60, 60, 60);
+    --clear-btn-hover-bg: rgb(35, 35, 35);
+    --clear-btn-hover-border: rgb(35, 35, 35);
+    --clear-btn-hover-text: #ffffff;
+
+    /* Settings Dialog */
+    --dialog-bg: rgba(255, 255, 255, 0.9);
+    --dialog-border: rgba(0, 0, 0, 0.1);
+    --dialog-text: rgb(50, 50, 50);
+    --backdrop-bg: rgba(0, 0, 0, 0.25);
+    --backdrop-blur: 4px;
+    --option-bg: rgba(0, 0, 0, 0.04);
+    --option-border: rgba(0, 0, 0, 0.15);
+    --option-hover-bg: rgba(0, 0, 0, 0.08);
+    --settings-icon-filter: brightness(0) opacity(0.65);
+    --settings-btn-hover-bg: rgba(0, 0, 0, 0.06);
+}
+
+/* ==========================================================================
+   DARK THEME (overrides only what changes)
+   ========================================================================== */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Brand Colors */
+    --accent-color: #8583d8;
+    --accent-color-hover: #9c9bea;
+    --on-accent-color: rgb(18, 18, 26);
+
+    /* Page & Background */
+    --page-bg-color: #101018;
+    --app-bg-image: url('../assets/images/backgroundDark.jpg');
+
+    /* Text Colors */
+    --text-main: rgb(230, 230, 238);
+    --text-muted: rgba(255, 255, 255, 0.4);
+    --text-footer: rgb(190, 190, 205);
+
+    /* Glassmorphism Surface */
+    --surface-rgb: 22, 22, 32;
+    --surface-opacity: 0.8;
+
+    /* UI Borders & Shadows */
+    --border-light: rgba(255, 255, 255, 0.12);
+    --shadow-soft: 0 3px 8px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-app: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+    /* Input (add task) */
+    --input-text: rgb(230, 230, 238);
+    --input-placeholder: rgba(255, 255, 255, 0.4);
+    --input-border: rgba(255, 255, 255, 0.5);
+    --input-border-focus: rgb(255, 255, 255);
+    --input-border-error: rgba(255, 90, 90, 0.8);
+
+    /* Task */
+    --task-bg: rgba(255, 255, 255, 0.06);
+    --task-done-bg: rgba(255, 255, 255, 0.03);
+    --task-done-border-left: rgba(255, 255, 255, 0.12);
+    --checkbox-border: rgb(210, 210, 220);
+
+    /* Delete button */
+    --delete-btn-hover-bg: rgba(255, 90, 80, 0.2);
+    --delete-icon-filter: invert(1);
+
+    /* Clear Completed button */
+    --clear-btn-border: rgba(255, 255, 255, 0.3);
+    --clear-btn-text: rgb(190, 190, 205);
+    --clear-btn-hover-bg: rgb(235, 235, 245);
+    --clear-btn-hover-border: rgb(235, 235, 245);
+    --clear-btn-hover-text: rgb(25, 25, 25);
+
+     /* Settings Dialog */
+    --dialog-bg: rgba(30, 30, 42, 0.92);
+    --dialog-border: rgba(255, 255, 255, 0.12);
+    --dialog-text: rgb(230, 230, 238);
+    --backdrop-bg: rgba(0, 0, 0, 0.4);
+    --option-bg: rgba(255, 255, 255, 0.05);
+    --option-border: rgba(255, 255, 255, 0.15);
+    --option-hover-bg: rgba(255, 255, 255, 0.1);
+    --settings-icon-filter: invert(1) opacity(0.85);
+    --settings-btn-hover-bg: rgba(255, 255, 255, 0.12);
+}
